@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     var currentImageUrl: String? = null
+    var isclose: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -89,5 +91,21 @@ class MainActivity : AppCompatActivity() {
     fun next(view: View) {
 
         load()
+    }
+
+    override fun onBackPressed() {
+
+
+        if(isclose)
+        {
+            super.onBackPressed()
+        }
+        isclose = true
+        Toast.makeText(this@MainActivity, "Click again to exit",
+            Toast.LENGTH_SHORT).show()
+
+        Handler().postDelayed(Runnable {
+            isclose = false;
+        },2000)
     }
 }
